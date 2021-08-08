@@ -6,16 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class GameStats implements Serializable {
-    private Game game;
-    private boolean homewin;
-    private Stats homeStats;
-    private Stats awayStats;
-    private BigDecimal spread;
+public class GameAndTotalStats implements Serializable {
+    List<GameStats> gameStats;
+    Map<Integer, Stats> totalStats;
 }

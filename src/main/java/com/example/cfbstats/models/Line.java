@@ -5,17 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class GameStats implements Serializable {
-    private Game game;
-    private boolean homewin;
-    private Stats homeStats;
-    private Stats awayStats;
+public class Line {
+    private String provider;
     private BigDecimal spread;
+    private String formattedSpread;
+    private BigDecimal overUnder;
 }

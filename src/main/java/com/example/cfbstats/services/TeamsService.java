@@ -2,6 +2,7 @@ package com.example.cfbstats.services;
 
 import com.example.cfbstats.Repository.CollegeFootballDataAPI;
 import com.example.cfbstats.URLs;
+import com.example.cfbstats.models.Talent;
 import com.example.cfbstats.models.Team;
 import com.example.cfbstats.models.TeamRecord;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -23,6 +24,12 @@ import java.util.List;
 
 @Service
 public class TeamsService {
+    @Value("classpath:talent-2018.json")
+    Resource talent2018File;
+
+    @Value("classpath:talent-2019.json")
+    Resource talent2019File;
+
     @Value("classpath:teams.json")
     Resource teamsFile;
 
@@ -43,6 +50,29 @@ public class TeamsService {
 
     public List<Team> getFbsTeams(){
         return getTeamsFromJson();
+    }
+
+    public List<Talent> getTalent2018(){
+        return getTalentFromJson();
+    }
+    public List<Talent> getTalent2019(){
+        return getTalent2019FromJson();
+    }
+
+    public List<Talent> getTalentFromJson() {
+        try{
+            return objectMapper.readValue(talent2018File.getInputStream(), new TypeReference<>() {});
+        } catch(IOException e){
+            throw new RuntimeException();
+        }
+    }
+
+    public List<Talent> getTalent2019FromJson() {
+        try{
+            return objectMapper.readValue(talent2019File.getInputStream(), new TypeReference<>() {});
+        } catch(IOException e){
+            throw new RuntimeException();
+        }
     }
 
     public List<Team> getTeamsFromJson() {
